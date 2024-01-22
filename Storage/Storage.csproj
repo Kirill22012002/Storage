@@ -25,4 +25,8 @@
       </Content>
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Remove="Migrations\Product.cs" />
+    </ItemGroup>
+
 </Project>

@@ -1,8 +1,6 @@
-﻿#nullable disable
-
-namespace Storage.DbModels
+﻿namespace Storage.Models
 {
-    public partial class Cell
+    public class CellDto
     {
         public long Id { get; set; }
         public string Title { get; set; }

@@ -2,7 +2,7 @@
 
 namespace Storage.DbModels
 {
-    public partial class Cell
+    public partial class Category
     {
         public long Id { get; set; }
         public string Title { get; set; }

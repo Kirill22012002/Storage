@@ -36,7 +36,10 @@ namespace Storage
                 options.UseSqlServer(Configuration.GetConnectionString("Storage")));
 
             services.AddScoped<CustomerRepository>();
-
+            services.AddScoped<ProductRepository>();
+            services.AddScoped<PartRepository>();
+            services.AddScoped<CellRepository>();
+            
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAd"));
 

@@ -18,11 +18,13 @@ namespace Storage.Context
         {
         }
 
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Cell> Cells { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<CustomersProduct> CustomersProducts { get; set; }
         public virtual DbSet<Part> Parts { get; set; }
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Record> Records { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -36,6 +38,17 @@ namespace Storage.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
+
+            modelBuilder.Entity<Category>(entity =>
+            {
+                entity.Property(e => e.Id)
+                    .ValueGeneratedNever()
+                    .HasColumnName("id");
+
+                entity.Property(e => e.Title)
+                    .HasMaxLength(255)
+                    .HasColumnName("title");
+            });
 
             modelBuilder.Entity<Cell>(entity =>
             {
@@ -78,11 +91,19 @@ namespace Storage.Context
 
             modelBuilder.Entity<Part>(entity =>
             {
+                entity.HasIndex(e => e.Barcode, "UQ_Part_Barcode")
+                    .IsUnique();
+
                 entity.Property(e => e.Id)
                     .ValueGeneratedNever()
                     .HasColumnName("id");
 
                 entity.Property(e => e.Amount).HasColumnName("amount");
+
+                entity.Property(e => e.Barcode)
+                    .HasMaxLength(50)
+                    .IsUnicode(false)
+                    .HasColumnName("barcode");
 
                 entity.Property(e => e.Datefiling)
                     .HasColumnType("datetime")
@@ -103,6 +124,27 @@ namespace Storage.Context
                     .HasColumnName("id");
 
                 entity.Property(e => e.Title).HasColumnName("title");
+            });
+
+            modelBuilder.Entity<ProductCategory>(entity =>
+            {
+                entity.HasNoKey();
+
+                entity.ToTable("ProductCategory");
+
+                entity.Property(e => e.IdCategory).HasColumnName("idCategory");
+
+                entity.Property(e => e.IdProduct).HasColumnName("idProduct");
+
+                entity.HasOne(d => d.IdCategoryNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.IdCategory)
+                    .HasConstraintName("FK__ProductCa__idCat__5DCAEF64");
+
+                entity.HasOne(d => d.IdProductNavigation)
+                    .WithMany()
+                    .HasForeignKey(d => d.IdProduct)
+                    .HasConstraintName("FK__ProductCa__idPro__5EBF139D");
             });
 
             modelBuilder.Entity<Record>(entity =>

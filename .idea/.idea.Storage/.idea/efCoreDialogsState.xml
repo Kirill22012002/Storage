@@ -5,7 +5,7 @@
       <map>
         <entry key="Common:buildConfiguration" value="Debug" />
         <entry key="Common:dbContextFolder" value="Context" />
-        <entry key="Common:dbContextName" value="MyDbContext" />
+        <entry key="Common:dbContextName" value="ApplicationDbContext" />
         <entry key="Common:f6fd50c6-f4e7-40f8-bf7a-df90f8749eec:dbContext" value="Storage.Context.ApplicationDbContext" />
         <entry key="Common:generateOnConfiguring" value="true" />
         <entry key="Common:noBuild" value="false" />
