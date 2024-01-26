@@ -2,7 +2,7 @@
 
 namespace Storage.DbModels
 {
-    public partial class ProductCategory
+    public partial class ProductCategory : BaseModel
     {
         public long? IdCategory { get; set; }
         public long? IdProduct { get; set; }

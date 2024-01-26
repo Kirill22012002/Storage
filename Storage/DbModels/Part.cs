@@ -4,7 +4,7 @@
 
 namespace Storage.DbModels
 {
-    public partial class Part
+    public partial class Part : BaseModel
     {
         public long Id { get; set; }
         public long? IdProduct { get; set; }

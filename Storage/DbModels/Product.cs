@@ -4,7 +4,7 @@
 
 namespace Storage.DbModels
 {
-    public partial class Product
+    public partial class Product : BaseModel
     {
         public Product()
         {
